@@ -1,183 +1,144 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#281c17" />
-  <meta name="description" content="Presentasi Sesi 5 Corporate Excel Training — FILTER & Dynamic Arrays oleh Post Management Data." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#281c17">
+  <meta name="description" content="Presentasi Sesi 5 Corporate Excel Training — FILTER & Dynamic Arrays oleh Post Management Data.">
   <title>Sesi 5 — FILTER & Dynamic Arrays | Post Management Data</title>
   <style>
-    :root {
-      --espresso:#281c17; --coffee:#493126; --brown:#6a4734; --caramel:#c58d55;
-      --cream:#f8f2e9; --paper:#fffdf9; --ink:#30241e; --muted:#82756b;
-      --line:#e7d9c9; --sage:#e6eee5; --blue:#e7edf2; --rose:#f5e5de;
-      --goldwash:#f5ead9; --shadow:0 22px 70px rgba(22,14,10,.22);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:var(--espresso);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
-    button{font:inherit}
-    .topbar{min-height:58px;padding:0 22px;color:#f9eee2;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(255,255,255,.12);background:rgba(26,18,14,.88)}
-    .brand{display:flex;align-items:center;gap:11px;min-width:0}.brand-mark{width:33px;height:33px;flex:0 0 auto;border:1px solid rgba(235,190,137,.8);border-radius:10px;display:grid;place-items:center;color:#e9b982;font-weight:800;font-size:13px;letter-spacing:-.08em}.brand-copy{min-width:0}.brand-title{font-size:12px;letter-spacing:.16em;font-weight:800;white-space:nowrap}.brand-sub{margin-top:2px;font-size:10px;color:#c5b4a8;letter-spacing:.08em;text-transform:uppercase}
-    .top-actions{display:flex;align-items:center;gap:8px}.quiet-btn{border:1px solid rgba(255,255,255,.19);background:transparent;color:#f9eee2;border-radius:9px;padding:8px 11px;font-size:11px;cursor:pointer;transition:.2s}.quiet-btn:hover,.quiet-btn:focus-visible{background:rgba(255,255,255,.1);outline:none}
-    main{flex:1;display:grid;place-items:center;padding:20px 18px;position:relative}.presentation{width:min(100%,1120px);aspect-ratio:16/9;max-height:calc(100vh - 142px);min-height:420px;position:relative;background:var(--cream);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
-    .slide{position:absolute;inset:0;padding:clamp(28px,4.1vw,56px) clamp(28px,4.8vw,64px) 52px;overflow:auto;opacity:0;transform:translateX(24px);pointer-events:none;transition:opacity .3s ease,transform .3s ease;background:radial-gradient(ellipse at 100% 0%,rgba(197,141,85,.09),transparent 32%),var(--cream)}
-    .slide.active{opacity:1;transform:translateX(0);pointer-events:auto;z-index:1}.slide.exit-left{transform:translateX(-24px)}
-    .slide-number{position:absolute;right:27px;bottom:20px;color:#a59484;font-size:10px;letter-spacing:.16em;font-weight:700}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--brown);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;margin-bottom:13px}.eyebrow::before{content:"";width:24px;height:2px;background:var(--caramel)}
-    h1,h2,h3,p{margin-top:0}h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(36px,5vw,66px);letter-spacing:-.045em;line-height:1.02;margin-bottom:20px}h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(28px,3.4vw,42px);line-height:1.1;letter-spacing:-.035em;font-weight:500;margin-bottom:14px}h3{font-size:15px;line-height:1.25;margin-bottom:8px;color:var(--coffee)}p{color:#66574c;line-height:1.55;font-size:clamp(12px,1.1vw,14px)}.lead{max-width:720px;font-size:clamp(15px,1.55vw,18px);color:#6c5b4e;line-height:1.55}.accent{color:var(--caramel)}
-    .cover{background:linear-gradient(120deg,rgba(40,28,23,.99),rgba(73,49,38,.97));color:var(--cream)}.cover::before{content:"";position:absolute;width:50%;aspect-ratio:1;right:-12%;top:-25%;border-radius:50%;border:1px solid rgba(223,176,126,.28);box-shadow:0 0 0 34px rgba(223,176,126,.04),0 0 0 74px rgba(223,176,126,.035),0 0 0 125px rgba(223,176,126,.025)}.cover::after{content:"";position:absolute;right:12%;bottom:15%;width:19%;height:29%;border:1px solid rgba(223,176,126,.3);border-radius:48% 48% 8px 8px;transform:rotate(14deg)}.cover .eyebrow{color:#e9bc8e}.cover h1{max-width:760px;position:relative;z-index:1}.cover .lead{color:#d8c8ba;max-width:600px;position:relative;z-index:1}.cover-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;position:relative;z-index:1}.pill{padding:9px 13px;border:1px solid rgba(255,255,255,.18);border-radius:100px;color:#e8d9ca;font-size:11px}.cover-footer{position:absolute;left:clamp(28px,4.8vw,64px);bottom:27px;color:#bba697;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-    .card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:23px}.card{background:rgba(255,253,249,.9);border:1px solid var(--line);border-radius:13px;padding:16px;min-width:0}.card p{font-size:11px;margin-bottom:0}.card .number{color:var(--caramel);font:26px Georgia,serif;margin-bottom:9px}.icon-box{width:35px;height:35px;border-radius:10px;background:var(--goldwash);color:var(--brown);display:grid;place-items:center;font-size:15px;font-weight:800;margin-bottom:10px}
-    .flow{display:flex;align-items:stretch;gap:8px;margin:26px 0 21px}.flow-step{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:15px 12px;min-width:0}.flow-step b{display:block;font-size:12px;color:var(--coffee);margin-bottom:6px}.flow-step span{display:block;font-size:10px;line-height:1.4;color:var(--muted)}.flow-arrow{align-self:center;color:var(--caramel);font-size:20px;font-weight:700}
-    .bottom-callout{display:flex;align-items:flex-start;gap:12px;padding:14px 17px;background:var(--goldwash);border-left:3px solid var(--caramel);border-radius:8px;color:var(--coffee);font-size:12px;line-height:1.5;margin-top:16px}
-    .compare{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:22px}.compare-panel{border-radius:14px;padding:19px;min-height:190px}.raw{background:var(--rose)}.master{background:var(--sage)}.panel-tag{display:inline-block;font-size:9px;text-transform:uppercase;letter-spacing:.15em;font-weight:800;border-radius:100px;padding:6px 9px;background:rgba(255,255,255,.66);margin-bottom:11px}
-    .mini-table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-top:15px;font-size:11px;overflow:hidden}.mini-table th{text-align:left;color:#f8f0e8;background:var(--coffee);font-size:10px;font-weight:700;padding:10px}.mini-table td{border-bottom:1px solid #eee4d8;padding:9px 10px;color:#5d4e43}.mini-table tr:last-child td{border-bottom:0}.ok{color:#43724d;font-weight:800}.bad{color:#a24e37;font-weight:800}
-    .formula{font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#563c2b;background:#f2e6d6;border:1px solid #e5d2bc;padding:11px 13px;border-radius:8px;display:block;overflow-wrap:anywhere;white-space:normal}.formula.dark{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#f6d5b1}.formula-stack{display:grid;gap:9px;margin-top:15px}.formula-row{display:grid;grid-template-columns:minmax(110px,.43fr) 1fr;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);padding:11px 13px;border-radius:9px}.formula-row strong{font-size:11px;color:var(--coffee)}.formula-row code{font:11px/1.5 ui-monospace,monospace;color:#765337;white-space:normal;overflow-wrap:anywhere}
-    .step-list{counter-reset:step;display:grid;gap:12px;margin-top:20px}.step{display:grid;grid-template-columns:38px 1fr;gap:13px;align-items:start}.step::before{counter-increment:step;content:counter(step,decimal-leading-zero);width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--goldwash);color:var(--brown);font-size:11px;font-weight:800}.step h3{margin:2px 0 4px}.step p{font-size:11px;margin-bottom:0}
-    .two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start;margin-top:19px}.side-note{background:var(--coffee);color:var(--cream);border-radius:14px;padding:21px;position:relative;overflow:hidden}.side-note h3{color:#f3cfaa}.side-note p,.side-note li{color:#e1d1c4;font-size:11px}.side-note p:last-child{margin-bottom:0}.side-note ul{padding-left:18px;line-height:1.8}
-    .time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.time-box{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}.time-box strong{display:block;color:var(--brown);font:27px Georgia,serif;margin-bottom:5px}.time-box span{display:block;font-size:11px;color:var(--muted);line-height:1.4}.time-box.active{background:var(--coffee);border-color:var(--coffee)}.time-box.active strong,.time-box.active span{color:#f8e5d2}
-    .note-pop{position:fixed;inset:0;z-index:20;display:none;background:rgba(11,8,6,.55);padding:18px;align-items:center;justify-content:center}.note-pop.open{display:flex}.note-card{width:min(680px,100%);max-height:82vh;overflow:auto;background:var(--paper);border-radius:16px;padding:24px;box-shadow:var(--shadow)}.note-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.note-head h3{font:19px Georgia,serif}.note-card p,.note-card li{font-size:13px;line-height:1.65}.note-card .quiet-btn{color:var(--coffee);border-color:var(--line)}
-    .controls{min-height:64px;color:#f1e2d5;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid rgba(255,255,255,.12);background:rgba(26,18,14,.88)}.progress-wrap{display:flex;align-items:center;gap:12px;flex:1;max-width:390px}.progress-track{height:3px;background:rgba(255,255,255,.18);border-radius:20px;flex:1;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--caramel);transition:width .25s ease}.counter{font-size:11px;color:#cbb9aa;min-width:48px;font-variant-numeric:tabular-nums}.navs{display:flex;gap:8px;align-items:center}.nav-btn{background:var(--caramel);color:#241812;border:0;border-radius:10px;width:40px;height:38px;display:grid;place-items:center;cursor:pointer;font-size:18px;font-weight:800}.nav-btn:disabled{opacity:.35;cursor:not-allowed}.keyboard-hint{font-size:10px;color:#ad9b8c}
-    @media(max-width:720px){.topbar{min-height:54px;padding:8px 12px;align-items:flex-start}.brand-sub,.keyboard-hint{display:none}.brand-title{font-size:10px;letter-spacing:.1em}.top-actions{flex-wrap:wrap;justify-content:flex-end}.quiet-btn{padding:7px 9px;font-size:10px}main{padding:12px 8px}.presentation{aspect-ratio:auto;height:min(76vh,760px);min-height:500px;max-height:none;border-radius:12px}.slide{padding:26px 21px 48px}h1{font-size:40px}h2{font-size:30px}.card-grid{gap:8px;margin-top:16px}.card{padding:12px}.card p{font-size:10px}.flow{flex-direction:column;gap:6px;margin:17px 0}.flow-step{padding:10px 12px}.flow-arrow{transform:rotate(90deg);align-self:center;font-size:15px;line-height:1}.compare,.two-col{grid-template-columns:1fr;gap:10px}.compare-panel{padding:14px;min-height:unset}.formula-row{grid-template-columns:1fr;gap:4px;padding:10px}.time-grid{gap:7px}.time-box{padding:10px}.time-box strong{font-size:23px}.time-box span{font-size:9px}.controls{padding:9px 12px;min-height:58px}.progress-wrap{max-width:unset}.nav-btn{width:37px;height:35px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
-    @media print{html,body{background:#fff}.topbar,.controls,.note-pop{display:none!important}main{display:block;padding:0}.presentation{width:100%;max-height:none;height:auto;aspect-ratio:auto;border-radius:0;overflow:visible;box-shadow:none}.slide,.slide.active{position:relative;inset:auto;opacity:1;transform:none;pointer-events:auto;width:100%;height:56.25vw;min-height:0;page-break-after:always;overflow:hidden;display:block}}
+    :root{--espresso:#281c17;--coffee:#493126;--brown:#6a4734;--caramel:#c58d55;--cream:#f8f2e9;--paper:#fffdf9;--ink:#30241e;--muted:#82756b;--line:#e7d9c9;--sage:#e6eee5;--rose:#f5e5de;--goldwash:#f5ead9;--shadow:0 22px 70px rgba(22,14,10,.22)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--espresso);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}button{font:inherit}
+    .topbar{min-height:58px;padding:8px 22px;color:#f9eee2;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(255,255,255,.12);background:rgba(26,18,14,.9)}.brand{display:flex;align-items:center;gap:11px;min-width:0}.brand-mark{width:34px;height:34px;border:1px solid rgba(235,190,137,.8);border-radius:10px;display:grid;place-items:center;color:#e9b982;font-weight:800;font-size:13px}.brand-title{font-size:12px;letter-spacing:.15em;font-weight:800;white-space:nowrap}.brand-sub{font-size:10px;color:#c5b4a8;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.quiet-btn{border:1px solid rgba(255,255,255,.2);background:transparent;color:#f9eee2;border-radius:9px;padding:8px 11px;font-size:11px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}.quiet-btn:hover,.quiet-btn:focus-visible{background:rgba(255,255,255,.1);outline:none}.worksheet-link{border-color:rgba(197,141,85,.8);color:#f3cfaa}
+    main{flex:1;display:grid;place-items:center;padding:20px 18px}.presentation{width:min(100%,1120px);aspect-ratio:16/9;max-height:calc(100vh - 142px);min-height:420px;position:relative;background:var(--cream);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}.slide{position:absolute;inset:0;padding:clamp(28px,4.2vw,58px) clamp(28px,5vw,66px) 52px;overflow:auto;opacity:0;transform:translateX(20px);pointer-events:none;transition:opacity .25s,transform .25s;background:radial-gradient(ellipse at 100% 0%,rgba(197,141,85,.09),transparent 32%),var(--cream)}.slide.active{opacity:1;transform:none;pointer-events:auto;z-index:1}.slide-number{position:absolute;right:25px;bottom:18px;color:#a59484;font-size:10px;letter-spacing:.15em;font-weight:700}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--brown);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;margin-bottom:13px}.eyebrow:before{content:"";width:24px;height:2px;background:var(--caramel)}
+    h1,h2,h3,p{margin-top:0}h1{font:500 clamp(36px,5vw,66px)/1.02 Georgia,"Times New Roman",serif;letter-spacing:-.045em;margin-bottom:20px}h2{font:500 clamp(28px,3.5vw,42px)/1.1 Georgia,"Times New Roman",serif;letter-spacing:-.035em;margin-bottom:14px}h3{font-size:15px;line-height:1.25;margin-bottom:8px;color:var(--coffee)}p{color:#66574c;line-height:1.55;font-size:clamp(12px,1.1vw,14px)}.lead{max-width:720px;font-size:clamp(15px,1.55vw,18px);color:#6c5b4e}.accent{color:var(--caramel)}.cover{background:linear-gradient(120deg,#281c17,#493126);color:var(--cream)}.cover:before{content:"";position:absolute;width:48%;aspect-ratio:1;right:-12%;top:-25%;border:1px solid rgba(223,176,126,.28);border-radius:50%;box-shadow:0 0 0 34px rgba(223,176,126,.04),0 0 0 74px rgba(223,176,126,.035),0 0 0 125px rgba(223,176,126,.025)}.cover .eyebrow{color:#e9bc8e}.cover .lead{color:#d8c8ba;max-width:590px}.cover h1{position:relative;z-index:1}.cover-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}.pill{padding:9px 13px;border:1px solid rgba(255,255,255,.18);border-radius:100px;color:#e8d9ca;font-size:11px}.cover-footer{position:absolute;left:clamp(28px,5vw,66px);bottom:25px;color:#bba697;font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px}.card,.panel,.example{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:16px;min-width:0}.card .num{color:var(--caramel);font:25px Georgia,serif;margin-bottom:8px}.card p,.panel p,.example p{font-size:11px;margin-bottom:0}.flow{display:flex;align-items:stretch;gap:8px;margin:24px 0}.flow-step{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 12px}.flow-step b,.flow-step span{display:block}.flow-step b{font-size:12px;color:var(--coffee);margin-bottom:5px}.flow-step span{font-size:10px;color:var(--muted);line-height:1.4}.arrow{align-self:center;color:var(--caramel);font-size:20px;font-weight:800}.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.panel.raw{background:var(--rose)}.panel.good{background:var(--sage)}.tag{display:inline-block;background:rgba(255,255,255,.7);border-radius:100px;padding:5px 9px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;margin-bottom:10px}.formula{display:block;background:#f2e6d6;border:1px solid #e5d2bc;color:#563c2b;border-radius:8px;padding:11px 13px;font:12px/1.7 ui-monospace,Consolas,monospace;overflow-wrap:anywhere;margin:10px 0}.formula-list{display:grid;gap:9px;margin-top:14px}.formula-row{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center;background:var(--paper);border:1px solid var(--line);padding:11px 13px;border-radius:9px;font-size:11px}.formula-row b{color:var(--coffee)}.formula-row code{color:#765337;overflow-wrap:anywhere}.callout{display:flex;gap:10px;align-items:flex-start;background:var(--goldwash);border-left:3px solid var(--caramel);padding:13px 16px;border-radius:8px;margin-top:15px;color:var(--coffee);font-size:12px;line-height:1.5}.steps{counter-reset:step;display:grid;gap:12px;margin-top:18px}.step{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start}.step:before{counter-increment:step;content:counter(step,decimal-leading-zero);width:34px;height:34px;border-radius:10px;background:var(--goldwash);color:var(--brown);display:grid;place-items:center;font-size:11px;font-weight:800}.step h3{margin:2px 0 4px}.step p{font-size:11px;margin:0}.dark-note{background:var(--coffee);color:var(--cream);border-radius:13px;padding:19px}.dark-note h3{color:#f3cfaa}.dark-note p,.dark-note li{color:#e1d1c4;font-size:11px}.dark-note ul{padding-left:18px;line-height:1.8}.mini-table{width:100%;border-collapse:collapse;background:var(--paper);margin-top:12px;font-size:11px}.mini-table th{background:var(--coffee);color:#fff;padding:9px;text-align:left}.mini-table td{border-bottom:1px solid #eee4d8;padding:9px;color:#5d4e43}.ok{color:#43724d;font-weight:800}.bad{color:#a24e37;font-weight:800}.worksheet-inline{color:#6a4734;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+    .controls{min-height:64px;color:#f1e2d5;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid rgba(255,255,255,.12);background:rgba(26,18,14,.9)}.progress-wrap{display:flex;align-items:center;gap:12px;flex:1;max-width:390px}.progress{height:3px;background:rgba(255,255,255,.18);border-radius:20px;flex:1;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--caramel);transition:width .25s}.counter{font-size:11px;color:#cbb9aa;min-width:48px;font-variant-numeric:tabular-nums}.navs{display:flex;gap:8px}.nav-btn{background:var(--caramel);color:#241812;border:0;border-radius:10px;width:40px;height:38px;display:grid;place-items:center;cursor:pointer;font-size:18px;font-weight:800}.nav-btn:disabled{opacity:.35;cursor:not-allowed}.keyboard-hint{font-size:10px;color:#ad9b8c}
+    .modal{position:fixed;inset:0;z-index:20;display:none;background:rgba(11,8,6,.55);padding:18px;align-items:center;justify-content:center}.modal.open{display:flex}.modal-card{width:min(680px,100%);max-height:82vh;overflow:auto;background:var(--paper);border-radius:16px;padding:24px;box-shadow:var(--shadow)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.modal-head h3{font:19px Georgia,serif}.modal-card p,.modal-card li{font-size:13px;line-height:1.65}.modal-card .quiet-btn{color:var(--coffee);border-color:var(--line)}
+    @media(max-width:720px){.topbar{padding:8px 12px;align-items:flex-start}.brand-sub,.keyboard-hint{display:none}.brand-title{font-size:10px;letter-spacing:.1em}.top-actions{flex-wrap:wrap;justify-content:flex-end}.quiet-btn{padding:7px 9px;font-size:10px}main{padding:12px 8px}.presentation{aspect-ratio:auto;height:min(76vh,760px);min-height:500px;max-height:none;border-radius:12px}.slide{padding:26px 21px 48px}h1{font-size:40px}h2{font-size:30px}.grid{gap:8px}.card,.panel,.example{padding:12px}.flow{flex-direction:column;gap:6px}.arrow{transform:rotate(90deg);align-self:center}.compare{grid-template-columns:1fr}.formula-row{grid-template-columns:1fr;gap:4px}.controls{padding:9px 12px;min-height:58px}.nav-btn{width:37px;height:35px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+    @media print{html,body{background:#fff}.topbar,.controls,.modal{display:none!important}main{display:block;padding:0}.presentation{width:100%;max-height:none;height:auto;aspect-ratio:auto;border-radius:0;overflow:visible;box-shadow:none}.slide,.slide.active{position:relative;inset:auto;opacity:1;transform:none;pointer-events:auto;width:100%;height:56.25vw;min-height:0;page-break-after:always;overflow:hidden;display:block}}
   </style>
 </head>
 <body>
 <header class="topbar">
-  <div class="brand" aria-label="Post Management Data"><div class="brand-mark">PMD</div><div class="brand-copy"><div class="brand-title">POST MANAGEMENT DATA</div><div class="brand-sub">Corporate Excel Training · IFM Operations</div></div></div>
+  <div class="brand" aria-label="Post Management Data"><div class="brand-mark">PMD</div><div><div class="brand-title">POST MANAGEMENT DATA</div><div class="brand-sub">Corporate Excel Training · IFM Operations</div></div></div>
   <div class="top-actions">
     <button class="quiet-btn" id="outlineBtn" type="button">Daftar materi</button>
+    <a class="quiet-btn worksheet-link" href="https://docs.google.com/spreadsheets/d/1U_iBl-xTPXZ1wSWWSlKlmaBsz0VpD6iC/edit?usp=sharing&amp;ouid=113453549576979377139&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer" title="Buka workbook latihan peserta Sesi 5">Buka Soal Sesi 5 ↗</a>
     <button class="quiet-btn" id="notesBtn" type="button">Catatan tutor</button>
     <button class="quiet-btn" id="fullscreenBtn" type="button">⛶ Layar penuh</button>
   </div>
 </header>
 <main>
 <div class="presentation" id="presentation" aria-label="Presentasi Sesi 5" aria-live="polite">
-  <section class="slide cover active" data-title="Pembuka" data-note="Buka dengan menghubungkan materi sebelumnya. Sesi 4 mengajarkan cara mengambil informasi dari Master Data memakai VLOOKUP dan XLOOKUP. Sesi 5 melanjutkan dengan cara menampilkan hanya data yang dibutuhkan, berdasarkan kriteria. Sampaikan bahwa workbook memakai data hasil Lookup Sesi 4 sebagai sumber latihan.">
-    <div class="eyebrow">SESI 05 · DATA DINAMIS</div>
-    <h1><span class="accent">FILTER</span> &amp;<br>Dynamic Arrays</h1>
+  <section class="slide cover active" data-title="Pembuka" data-note="Buka dengan menghubungkan materi sebelumnya. Sesi 4 mengajarkan cara mengambil informasi dari Master Data memakai VLOOKUP dan XLOOKUP. Sesi 5 melanjutkan dengan cara menampilkan hanya data yang dibutuhkan berdasarkan kriteria. Workbook memakai data hasil Lookup Sesi 4 sebagai sumber latihan.">
+    <div class="eyebrow">SESI 05 · DATA DINAMIS</div><h1><span class="accent">FILTER</span> &amp;<br>Dynamic Arrays</h1>
     <p class="lead">Menampilkan, memilih, dan mengurutkan data secara otomatis berdasarkan kebutuhan operasional.</p>
     <div class="cover-meta"><span class="pill">Corporate Excel Training</span><span class="pill">IFM Operations</span><span class="pill">60 menit</span></div>
-    <div class="cover-footer">Post Management Data · Learn it, structure it, automate it</div><div class="slide-number"></div>
+    <div class="cover-footer">Post Management Data · Learn it, structure it, automate it</div>
   </section>
 
   <section class="slide" data-title="Target pembelajaran" data-note="Sebutkan tiga target: menampilkan data dengan satu kriteria; menampilkan data dengan dua kriteria; membuat daftar unik dan mengurutkan data. Target tambahan adalah memahami spill: satu formula dapat menghasilkan banyak sel.">
     <div class="eyebrow">01 · LEARNING OUTCOMES</div><h2>Setelah sesi ini, peserta mampu…</h2><p class="lead">Mengubah kriteria pencarian tanpa harus menyaring dan menyusun data secara manual.</p>
-    <div class="card-grid">
-      <div class="card"><div class="number">01</div><h3>FILTER satu kriteria</h3><p>Menampilkan baris sesuai satu kategori yang dipilih.</p></div>
-      <div class="card"><div class="number">02</div><h3>FILTER dua kriteria</h3><p>Menggabungkan kategori dan batas minimum quantity.</p></div>
-      <div class="card"><div class="number">03</div><h3>UNIQUE</h3><p>Membuat daftar kategori tanpa pengulangan.</p></div>
-      <div class="card"><div class="number">04</div><h3>SORT & Spill</h3><p>Mengurutkan nama barang dan memahami hasil dinamis.</p></div>
-    </div><div class="slide-number"></div>
+    <div class="grid">
+      <div class="card"><div class="num">01</div><h3>FILTER satu kriteria</h3><p>Menampilkan baris sesuai satu kategori yang dipilih.</p></div>
+      <div class="card"><div class="num">02</div><h3>FILTER dua kriteria</h3><p>Menggabungkan kategori dan batas minimum quantity.</p></div>
+      <div class="card"><div class="num">03</div><h3>UNIQUE</h3><p>Membuat daftar kategori tanpa pengulangan.</p></div>
+      <div class="card"><div class="num">04</div><h3>SORT &amp; Spill</h3><p>Mengurutkan nama barang dan memahami hasil dinamis.</p></div>
+    </div>
   </section>
 
   <section class="slide" data-title="Keterkaitan dengan Sesi 4" data-note="Tekankan kesinambungan. Data 01_DATA_HASIL_S4 sudah disiapkan sebagai hasil lookup. Peserta tidak perlu melakukan lookup ulang pada sesi ini. Mereka menggunakan hasil tersebut untuk membuat tampilan data yang berubah sesuai pilihan kriteria.">
     <div class="eyebrow">02 · CONTINUOUS WORKFLOW</div><h2>Dari Lookup menuju data dinamis</h2><p class="lead">Sesi 4 melengkapi informasi barang. Sesi 5 memilih informasi mana yang perlu ditampilkan.</p>
-    <div class="flow"><div class="flow-step"><b>Sesi 4 · Lookup</b><span>Item code, nama standar, kategori, satuan, harga</span></div><div class="flow-arrow">›</div><div class="flow-step"><b>Sesi 5 · Filter</b><span>Pilih kategori dan kriteria quantity</span></div><div class="flow-arrow">›</div><div class="flow-step"><b>Sesi 6 · Integrasi</b><span>Gunakan hasil filter dalam draft BQ</span></div></div>
-    <div class="bottom-callout"><strong>Workbook sumber:</strong> <span>Gunakan sheet <b>01_DATA_HASIL_S4</b>. Jangan mengubah data sumber; semua formula latihan diisi pada area output berwarna kuning.</span></div>
+    <div class="flow"><div class="flow-step"><b>Sesi 4 · Lookup</b><span>Item code, nama standar, kategori, satuan, harga</span></div><div class="arrow">›</div><div class="flow-step"><b>Sesi 5 · Filter</b><span>Pilih kategori dan kriteria quantity</span></div><div class="arrow">›</div><div class="flow-step"><b>Sesi 6 · Integrasi</b><span>Gunakan hasil filter dalam draft BQ</span></div></div>
+    <div class="callout"><b>Workbook sumber:</b> Gunakan sheet <b>01_DATA_HASIL_S4</b>. Jangan mengubah data sumber; semua formula latihan diisi pada area output berwarna kuning.</div>
   </section>
 
-  <section class="slide" data-title="Apa itu FILTER?" data-note="Jelaskan FILTER seperti saringan. Kita punya tabel besar dan memilih kondisi. Excel mengembalikan baris yang memenuhi kondisi. Data sumber tidak dihapus dan tidak berubah. Perkenalkan bentuk umum formula. Array adalah tabel yang ingin ditampilkan; include adalah syarat TRUE/FALSE; if_empty adalah pesan opsional jika tidak ada hasil.">
+  <section class="slide" data-title="Apa itu FILTER?" data-note="Jelaskan FILTER seperti saringan. Kita punya tabel besar dan memilih kondisi. Excel mengembalikan baris yang memenuhi kondisi. Data sumber tidak dihapus dan tidak berubah. Array adalah tabel yang ingin ditampilkan; include adalah syarat TRUE/FALSE; if_empty adalah pesan opsional jika tidak ada hasil.">
     <div class="eyebrow">03 · FUNGSI FILTER</div><h2>FILTER bekerja seperti saringan</h2><p class="lead">Kita tidak menghapus data lain. Kita hanya menampilkan baris yang memenuhi kriteria.</p>
     <div class="compare">
-      <div class="compare-panel raw"><span class="panel-tag">Sebelum</span><h3>Seluruh data permintaan</h3><table class="mini-table"><thead><tr><th>Request</th><th>Kategori</th><th>Qty</th></tr></thead><tbody><tr><td>BQ-001</td><td>Machinery</td><td>1</td></tr><tr><td>BQ-002</td><td>Consumables</td><td>2</td></tr><tr><td>BQ-008</td><td>Equipment</td><td>1</td></tr><tr><td>BQ-014</td><td>Chemical</td><td>1</td></tr></tbody></table></div>
-      <div class="compare-panel master"><span class="panel-tag">Sesudah filter</span><h3>Hanya kategori Consumables</h3><table class="mini-table"><thead><tr><th>Request</th><th>Kategori</th><th>Qty</th></tr></thead><tbody><tr><td>BQ-002</td><td class="ok">Consumables</td><td>2</td></tr><tr><td>BQ-003</td><td class="ok">Consumables</td><td>2</td></tr></tbody></table><p style="font-size:10px;margin-top:8px">Ilustrasi sebagian hasil.</p></div>
+      <div class="panel raw"><span class="tag">Sebelum</span><h3>Seluruh data permintaan</h3><table class="mini-table"><thead><tr><th>Request</th><th>Kategori</th><th>Qty</th></tr></thead><tbody><tr><td>BQ-001</td><td>Machinery</td><td>1</td></tr><tr><td>BQ-002</td><td>Consumables</td><td>2</td></tr><tr><td>BQ-008</td><td>Equipment</td><td>1</td></tr><tr><td>BQ-014</td><td>Chemical</td><td>1</td></tr></tbody></table></div>
+      <div class="panel good"><span class="tag">Sesudah filter</span><h3>Hanya kategori Consumables</h3><table class="mini-table"><thead><tr><th>Request</th><th>Kategori</th><th>Qty</th></tr></thead><tbody><tr><td>BQ-002</td><td class="ok">Consumables</td><td>2</td></tr><tr><td>BQ-003</td><td class="ok">Consumables</td><td>2</td></tr></tbody></table><p style="margin-top:8px">Ilustrasi sebagian hasil.</p></div>
     </div>
-    <div class="formula-stack"><div class="formula-row"><strong>Bentuk umum</strong><code>=FILTER(array; include; [if_empty])</code></div><div class="formula-row"><strong>array</strong><code>Rentang data yang ingin ditampilkan</code></div><div class="formula-row"><strong>include</strong><code>Kondisi TRUE/FALSE untuk memilih baris</code></div><div class="formula-row"><strong>if_empty</strong><code>Pesan jika tidak ada hasil yang cocok</code></div></div>
+    <div class="formula-list"><div class="formula-row"><b>Bentuk umum</b><code>=FILTER(array; include; [if_empty])</code></div><div class="formula-row"><b>array</b><span>Rentang data yang ingin ditampilkan.</span></div><div class="formula-row"><b>include</b><span>Kondisi TRUE/FALSE untuk memilih baris.</span></div><div class="formula-row"><b>if_empty</b><span>Pesan jika tidak ada hasil yang cocok.</span></div></div>
   </section>
 
-  <section class="slide" data-title="Dynamic Array dan Spill" data-note="Tekankan bahwa hasil FILTER, UNIQUE, dan SORT dapat mengisi beberapa sel secara otomatis. Kita hanya mengetik satu formula pada sel awal. Area di bawah dan di samping harus kosong. Jika terhalang, Excel dapat menampilkan #SPILL!. Jangan menyalin formula ke setiap baris hasil.">
-    <div class="eyebrow">04 · DYNAMIC ARRAY</div><h2>Satu rumus, banyak hasil</h2><p class="lead">Hasil formula dapat “spill” atau mengalir ke beberapa sel secara otomatis.</p>
-    <div class="two-col">
-      <div><div class="example-card" style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px"><h3>Formula ditulis satu kali</h3><div class="formula">=FILTER(A2:C20;B2:B20="Consumables")</div><p style="font-size:11px;margin:12px 0 0">Formula cukup dimasukkan di sel awal output.</p></div>
-        <div class="flow" style="flex-direction:column;gap:5px;margin:14px 0"><div class="flow-step"><b>Sel awal</b><span>Tempat formula diketik</span></div><div class="flow-arrow" style="transform:rotate(90deg);align-self:center">›</div><div class="flow-step"><b>Area spill</b><span>Sel lain diisi otomatis oleh Excel</span></div></div>
-      </div>
-      <div class="side-note"><h3>Perhatikan!</h3><ul><li>Jangan mengetik pada area hasil spill.</li><li>Pastikan area output kosong.</li><li>Hindari merged cells di area hasil.</li><li>Jika muncul <b>#SPILL!</b>, periksa sel yang menghalangi.</li></ul><p>Fitur dynamic array tersedia di Microsoft 365/Excel 2021+ atau Google Sheets.</p></div>
+  <section class="slide" data-title="Dynamic Array dan Spill" data-note="Hasil FILTER, UNIQUE, dan SORT dapat mengisi beberapa sel secara otomatis. Kita hanya mengetik satu formula pada sel awal. Area di bawah dan di samping harus kosong. Jika terhalang, Excel dapat menampilkan #SPILL!. Jangan menyalin formula ke setiap baris hasil.">
+    <div class="eyebrow">04 · DYNAMIC ARRAY</div><h2>Satu rumus, banyak hasil</h2><p class="lead">Hasil formula dapat spill atau mengalir ke beberapa sel secara otomatis.</p>
+    <div class="compare">
+      <div class="example"><h3>Formula ditulis satu kali</h3><div class="formula">=FILTER(A2:C20;B2:B20="Consumables")</div><p>Formula cukup dimasukkan di sel awal output.</p></div>
+      <div class="dark-note"><h3>Perhatikan!</h3><ul><li>Jangan mengetik pada area hasil spill.</li><li>Pastikan area output kosong.</li><li>Hindari merged cells di area hasil.</li><li>Jika muncul <b>#SPILL!</b>, periksa sel yang menghalangi.</li></ul><p>Dynamic Array tersedia pada Microsoft 365/Excel 2021+ dan Google Sheets.</p></div>
     </div>
   </section>
 
   <section class="slide" data-title="Demo A — FILTER kategori" data-note="Buka workbook sheet 02_LATIHAN_FILTER. B5 adalah dropdown kategori. Header hasil ada di A7:J7. Masukkan formula di A8. Gunakan sumber A7:J23 dan kriteria kategori E7:E23 dibandingkan dengan B5. Jika B5 Consumables, hasil yang diharapkan enam request BQ-002 sampai BQ-007. Coba ubah ke Machinery, Equipment, dan Chemical.">
     <div class="eyebrow">05 · DEMO TUGAS A</div><h2>FILTER berdasarkan kategori</h2><p class="lead">Mulai dari satu kriteria: tampilkan hanya barang dengan kategori yang dipilih.</p>
-    <div class="two-col">
-      <div><div class="example-card"><h3>Input kriteria</h3><div style="display:flex;gap:10px;align-items:center"><span style="font-size:12px;color:var(--muted)">Kategori</span><span class="formula">B5 = Consumables ▾</span></div><h3 style="margin-top:18px">Masukkan di A8</h3><div class="formula">=FILTER('01_DATA_HASIL_S4'!A7:J23;'01_DATA_HASIL_S4'!E7:E23=$B$5;"Tidak ada data")</div></div></div>
-      <div class="side-note"><h3>Cara membaca</h3><p>Ambil seluruh data A sampai J. Tampilkan hanya baris yang kategori di kolom E sama dengan pilihan pada B5.</p><p>Jika tidak ada baris yang cocok, tampilkan “Tidak ada data”.</p><p><b>Hasil B5 = Consumables:</b> enam request, BQ-002 sampai BQ-007.</p></div>
+    <div class="compare">
+      <div class="example"><h3>Input kriteria</h3><p>Kategori pada sel B5 = Consumables</p><h3 style="margin-top:14px">Masukkan rumus di A8</h3><div class="formula">=FILTER('01_DATA_HASIL_S4'!A7:J23;'01_DATA_HASIL_S4'!E7:E23=$B$5;"Tidak ada data")</div></div>
+      <div class="dark-note"><h3>Cara membaca</h3><p>Ambil seluruh data A sampai J. Tampilkan hanya baris yang kategori di kolom E sama dengan pilihan pada B5.</p><p>Jika tidak ada baris yang cocok, tampilkan “Tidak ada data”.</p><p><b>Hasil B5 = Consumables:</b> enam request, BQ-002 sampai BQ-007.</p></div>
     </div>
-    <div class="bottom-callout">Pastikan rentang hasil A:J sama dengan susunan header output A:J agar kolom tidak bergeser.</div>
+    <div class="callout">Pastikan rentang hasil A:J sama dengan susunan header output A:J agar kolom tidak bergeser.</div>
   </section>
 
-  <section class="slide" data-title="Uji perubahan kriteria" data-note="Setelah rumus di A8 berhasil, ubah dropdown B5. Tekankan bahwa formula tidak perlu diganti. Perubahan kriteria akan mengubah hasil spill. Minta peserta menguji setidaknya dua kategori lain.">
-    <div class="eyebrow">06 · UJI KRITERIA</div><h2>Ubah pilihan, hasil ikut berubah</h2><p class="lead">Inilah manfaat utama FILTER: satu formula dapat digunakan untuk banyak pilihan kriteria.</p>
-    <div class="card-grid">
-      <div class="card"><div class="number">A</div><h3>Consumables</h3><p>Menampilkan BQ-002 sampai BQ-007.</p></div>
-      <div class="card"><div class="number">B</div><h3>Machinery</h3><p>Menampilkan item kategori Machinery.</p></div>
-      <div class="card"><div class="number">C</div><h3>Equipment</h3><p>Menampilkan item kategori Equipment.</p></div>
-      <div class="card"><div class="number">D</div><h3>Chemical</h3><p>Menampilkan item kategori Chemical.</p></div>
-    </div>
-    <div class="bottom-callout"><strong>Instruksi demo:</strong> <span>Ubah dropdown B5. Amati hasilnya. Jangan mengubah formula di A8.</span></div>
+  <section class="slide" data-title="Uji perubahan kriteria" data-note="Setelah rumus di A8 berhasil, ubah dropdown B5. Formula tidak perlu diganti. Perubahan kriteria akan mengubah hasil spill. Minta peserta menguji setidaknya dua kategori lain.">
+    <div class="eyebrow">06 · UJI KRITERIA</div><h2>Ubah pilihan, hasil ikut berubah</h2><p class="lead">Satu formula dapat digunakan untuk banyak pilihan kriteria.</p>
+    <div class="grid"><div class="card"><div class="num">A</div><h3>Consumables</h3><p>Menampilkan BQ-002 sampai BQ-007.</p></div><div class="card"><div class="num">B</div><h3>Machinery</h3><p>Menampilkan item kategori Machinery.</p></div><div class="card"><div class="num">C</div><h3>Equipment</h3><p>Menampilkan item kategori Equipment.</p></div><div class="card"><div class="num">D</div><h3>Chemical</h3><p>Menampilkan item kategori Chemical.</p></div></div>
+    <div class="callout"><b>Instruksi demo:</b> Ubah dropdown B5. Amati hasilnya. Jangan mengubah formula di A8.</div>
   </section>
 
   <section class="slide" data-title="Demo B — FILTER dua kriteria" data-note="Buka sheet 03_LATIHAN_FILTER. Kategori di B2, quantity minimum di D2, formula awal di A5. Gunakan tanda * untuk AND, artinya kedua kondisi wajib benar. Gunakan >= karena quantity adalah minimum. Dengan kategori Consumables dan minimum 2, BQ-002 hingga BQ-007 tampil; BQ-004 tetap termasuk karena quantity 3. Jika batas diubah menjadi 3, hasil akan lebih sedikit.">
     <div class="eyebrow">07 · DEMO TUGAS B</div><h2>FILTER dengan dua kriteria</h2><p class="lead">Sekarang kita gabungkan kategori dan batas minimum quantity.</p>
-    <div class="two-col">
-      <div><div class="example-card"><h3>Input kriteria</h3><table class="mini-table"><tbody><tr><td>Kategori (B2)</td><td><b>Consumables</b></td></tr><tr><td>Qty minimum (D2)</td><td><b>2</b></td></tr></tbody></table><h3 style="margin-top:16px">Formula di A5</h3><div class="formula">=FILTER('01_DATA_HASIL_S4'!A7:J23;('01_DATA_HASIL_S4'!E7:E23=$B$2)*('01_DATA_HASIL_S4'!F7:F23&gt;=$D$2);"Tidak ada data")</div></div></div>
-      <div class="side-note"><h3>Cara membaca</h3><p>Tampilkan data jika kategorinya sama dengan B2 <b>DAN</b> quantity-nya lebih besar atau sama dengan D2.</p><p><b>*</b> menggabungkan kondisi sebagai AND.</p><p><b>&gt;=</b> berarti lebih besar atau sama dengan.</p><p>Qty 3 tetap lolos ketika batas minimum adalah 2.</p></div>
-    </div>
-  </section>
-
-  <section class="slide" data-title="Mengapa memakai * dan >=?" data-note="Jelaskan logika dua kriteria. Tanda * di antara array kondisi berperan sebagai AND: keduanya harus benar. Operator >= dipilih karena inputnya berlabel Qty minimum. Jika menggunakan =2, baris dengan quantity 3 tidak ikut tampil. Coba ubah nilai D2 dari 2 menjadi 3 dan minta peserta menyebutkan apa yang berubah.">
-    <div class="eyebrow">08 · MEMAHAMI KRITERIA</div><h2>Dua simbol yang perlu dipahami</h2>
     <div class="compare">
-      <div class="compare-panel master"><span class="panel-tag">AND</span><h3>Tanda bintang <code>*</code></h3><p>Kedua kriteria harus terpenuhi.</p><div class="formula">Kategori cocok<br>*<br>Qty memenuhi batas</div><p style="margin-top:10px;font-size:11px">Jika salah satu kondisi FALSE, baris tidak ditampilkan.</p></div>
-      <div class="compare-panel raw"><span class="panel-tag">Batas minimum</span><h3>Operator <code>&gt;=</code></h3><p>Lebih besar atau sama dengan.</p><table class="mini-table"><thead><tr><th>Qty</th><th>Min. 2?</th></tr></thead><tbody><tr><td>1</td><td class="bad">Tidak</td></tr><tr><td>2</td><td class="ok">Ya</td></tr><tr><td>3</td><td class="ok">Ya</td></tr></tbody></table></div>
+      <div class="example"><h3>Input kriteria</h3><table class="mini-table"><tbody><tr><td>Kategori (B2)</td><td><b>Consumables</b></td></tr><tr><td>Qty minimum (D2)</td><td><b>2</b></td></tr></tbody></table><h3 style="margin-top:14px">Formula di A5</h3><div class="formula">=FILTER('01_DATA_HASIL_S4'!A7:J23;('01_DATA_HASIL_S4'!E7:E23=$B$2)*('01_DATA_HASIL_S4'!F7:F23&gt;=$D$2);"Tidak ada data")</div></div>
+      <div class="dark-note"><h3>Cara membaca</h3><p>Tampilkan data jika kategorinya sama dengan B2 <b>DAN</b> quantity-nya lebih besar atau sama dengan D2.</p><p><b>*</b> menggabungkan kondisi sebagai AND.</p><p><b>&gt;=</b> berarti lebih besar atau sama dengan.</p><p>Qty 3 tetap lolos ketika batas minimum adalah 2.</p></div>
     </div>
-    <div class="bottom-callout">Kesalahan umum: menggunakan <code>=2</code> padahal soal meminta quantity minimum 2. Akibatnya quantity 3 tidak ikut tampil.</div>
   </section>
 
-  <section class="slide" data-title="Demo C — UNIQUE dan SORT" data-note="Buka sheet 04_UNIQUE_SORT. Masukkan formula di A6. Gunakan kategori sumber E7:E22, bukan E7:E23, agar baris BQ-017 yang berstatus PERIKSA MASTER dan belum memiliki kategori tidak ikut masuk. Hasil yang diharapkan: Chemical, Consumables, Equipment, Machinery. Jelaskan UNIQUE mengambil nilai berbeda satu kali, SORT mengurutkan hasil.">
+  <section class="slide" data-title="Mengapa memakai * dan &gt;=?" data-note="Tanda * di antara array kondisi berperan sebagai AND: keduanya harus benar. Operator >= dipilih karena inputnya berlabel Qty minimum. Jika menggunakan =2, baris dengan quantity 3 tidak ikut tampil. Coba ubah D2 dari 2 menjadi 3 dan minta peserta menyebutkan apa yang berubah.">
+    <div class="eyebrow">08 · MEMAHAMI KRITERIA</div><h2>Dua simbol yang perlu dipahami</h2>
+    <div class="compare"><div class="panel good"><span class="tag">AND</span><h3>Tanda bintang <code>*</code></h3><p>Kedua kriteria harus terpenuhi.</p><div class="formula">Kategori cocok<br>*<br>Qty memenuhi batas</div><p style="margin-top:10px">Jika salah satu kondisi FALSE, baris tidak ditampilkan.</p></div>
+      <div class="panel raw"><span class="tag">Batas minimum</span><h3>Operator <code>&gt;=</code></h3><p>Lebih besar atau sama dengan.</p><table class="mini-table"><thead><tr><th>Qty</th><th>Minimum 2?</th></tr></thead><tbody><tr><td>1</td><td class="bad">Tidak</td></tr><tr><td>2</td><td class="ok">Ya</td></tr><tr><td>3</td><td class="ok">Ya</td></tr></tbody></table></div></div>
+    <div class="callout">Kesalahan umum: menggunakan <code>=2</code> padahal soal meminta quantity minimum 2. Akibatnya quantity 3 tidak ikut tampil.</div>
+  </section>
+
+  <section class="slide" data-title="Demo C — UNIQUE dan SORT" data-note="Buka sheet 04_UNIQUE_SORT. Masukkan formula di A6. Gunakan kategori sumber E7:E22 agar baris BQ-017 yang berstatus PERIKSA MASTER dan belum memiliki kategori tidak ikut masuk. Hasil yang diharapkan: Chemical, Consumables, Equipment, Machinery. UNIQUE mengambil nilai berbeda satu kali, SORT mengurutkan hasil.">
     <div class="eyebrow">09 · DEMO TUGAS C</div><h2>UNIQUE + SORT: daftar kategori</h2><p class="lead">Saat kategori berulang, kita bisa mengambil daftar kategori tanpa duplikasi lalu mengurutkannya.</p>
-    <div class="two-col">
-      <div><h3>Formula di A6</h3><div class="formula">=SORT(UNIQUE('01_DATA_HASIL_S4'!E7:E22))</div><div class="formula-stack"><div class="formula-row"><strong>UNIQUE</strong><code>Mengambil nilai berbeda satu kali.</code></div><div class="formula-row"><strong>SORT</strong><code>Mengurutkan hasil, default teks A–Z.</code></div></div></div>
-      <div class="side-note"><h3>Hasil yang diharapkan</h3><ol style="padding-left:19px;line-height:1.9"><li>Chemical</li><li>Consumables</li><li>Equipment</li><li>Machinery</li></ol><p>Gunakan E7:E22 agar baris Floor Polisher yang belum memiliki kategori tidak ikut masuk.</p></div>
-    </div>
+    <div class="compare"><div class="example"><h3>Formula di A6</h3><div class="formula">=SORT(UNIQUE('01_DATA_HASIL_S4'!E7:E22))</div><div class="formula-list"><div class="formula-row"><b>UNIQUE</b><span>Mengambil nilai berbeda satu kali.</span></div><div class="formula-row"><b>SORT</b><span>Mengurutkan hasil, default teks A–Z.</span></div></div></div>
+      <div class="dark-note"><h3>Hasil yang diharapkan</h3><ol><li>Chemical</li><li>Consumables</li><li>Equipment</li><li>Machinery</li></ol><p>Gunakan E7:E22 agar baris Floor Polisher yang belum memiliki kategori tidak ikut masuk.</p></div></div>
   </section>
 
-  <section class="slide" data-title="Demo D — SORT nama item" data-note="Buka sheet 04_UNIQUE_SORT. Ikuti petunjuk workbook: formula dimasukkan di A24. Gunakan kolom C7:C23, yaitu Nama Item Standar. Hasil mengalir ke bawah dalam urutan A sampai Z. Ingat, data sumber mencakup Floor Polisher dengan status PERIKSA MASTER. SORT hanya mengurutkan nama dan bukan validasi item.">
+  <section class="slide" data-title="Demo D — SORT nama item" data-note="Buka sheet 04_UNIQUE_SORT. Ikuti petunjuk workbook: formula dimasukkan di A24. Gunakan kolom C7:C23, yaitu Nama Item Standar. Hasil mengalir ke bawah dalam urutan A sampai Z. Data sumber mencakup Floor Polisher dengan status PERIKSA MASTER. SORT hanya mengurutkan nama dan bukan validasi item.">
     <div class="eyebrow">10 · DEMO TUGAS D</div><h2>SORT nama barang A–Z</h2><p class="lead">Kita ingin melihat daftar nama item dalam urutan alfabetis tanpa mengurutkan data sumber secara manual.</p>
-    <div class="two-col">
-      <div><h3>Formula di A24</h3><div class="formula">=SORT('01_DATA_HASIL_S4'!C7:C23)</div><p style="margin-top:14px">Cara membaca: ambil nama item standar dari kolom C, lalu urutkan dari A sampai Z.</p></div>
-      <div class="side-note"><h3>Catatan kualitas data</h3><p>Daftar hasil SORT juga memuat Floor Polisher.</p><p>Item tersebut pada sumber masih berstatus <b>PERIKSA MASTER</b>.</p><p>SORT hanya mengurutkan data. Fungsi ini tidak menyatakan bahwa item sudah valid untuk costing.</p></div>
-    </div>
+    <div class="compare"><div class="example"><h3>Formula di A24</h3><div class="formula">=SORT('01_DATA_HASIL_S4'!C7:C23)</div><p>Cara membaca: ambil nama item standar dari kolom C, lalu urutkan dari A sampai Z.</p></div><div class="dark-note"><h3>Catatan kualitas data</h3><p>Daftar hasil SORT juga memuat Floor Polisher.</p><p>Item tersebut pada sumber masih berstatus <b>PERIKSA MASTER</b>.</p><p>SORT hanya mengurutkan data. Fungsi ini tidak menyatakan bahwa item sudah valid untuk costing.</p></div></div>
   </section>
 
   <section class="slide" data-title="Praktik kelompok" data-note="Alokasikan 30 menit. 0–7 menit Tugas A: FILTER satu kategori. 7–15 menit Tugas B: FILTER dua kriteria. 15–22 menit Tugas C: UNIQUE + SORT kategori. 22–27 menit Tugas D: SORT nama barang. 27–30 menit: uji perubahan kriteria dan siapkan hasil review. Ingatkan: jangan mengubah sumber dan jangan mengetik di area spill.">
     <div class="eyebrow">11 · GROUP PRACTICE · 30 MENIT</div><h2>Praktik kelompok: kerjakan Tugas A–D</h2><p class="lead">Gunakan workbook Sesi 5. Isi formula pada sel awal yang ditandai, lalu uji perubahan kriterianya.</p>
-    <div class="two-col">
-      <div class="step-list"><div class="step"><div><h3>Menit 0–7 · Tugas A</h3><p>FILTER berdasarkan kategori melalui dropdown B5.</p></div></div><div class="step"><div><h3>Menit 7–15 · Tugas B</h3><p>FILTER kategori dan quantity minimum. Gunakan <code>*</code> dan <code>&gt;=</code>.</p></div></div><div class="step"><div><h3>Menit 15–22 · Tugas C</h3><p>Buat daftar kategori unik dan terurut dengan UNIQUE + SORT.</p></div></div><div class="step"><div><h3>Menit 22–27 · Tugas D</h3><p>Urutkan nama item A–Z dengan SORT.</p></div></div><div class="step"><div><h3>Menit 27–30 · Uji hasil</h3><p>Ubah kriteria dan siapkan satu contoh untuk review.</p></div></div></div>
-      <div class="side-note"><h3>Output kelompok</h3><ul><li>Daftar kategori sesuai dropdown.</li><li>Daftar sesuai kategori dan qty minimum.</li><li>Daftar kategori tanpa duplikasi.</li><li>Daftar nama item A–Z.</li><li>Penjelasan mengapa hasil berubah.</li></ul><p>Jangan mengubah <b>01_DATA_HASIL_S4</b>.</p></div>
-    </div>
+    <div class="compare"><div><div class="steps"><div class="step"><div><h3>Menit 0–7 · Tugas A</h3><p>FILTER berdasarkan kategori melalui dropdown B5.</p></div></div><div class="step"><div><h3>Menit 7–15 · Tugas B</h3><p>FILTER kategori dan quantity minimum. Gunakan <code>*</code> dan <code>&gt;=</code>.</p></div></div><div class="step"><div><h3>Menit 15–22 · Tugas C</h3><p>Buat daftar kategori unik dan terurut dengan UNIQUE + SORT.</p></div></div><div class="step"><div><h3>Menit 22–27 · Tugas D</h3><p>Urutkan nama item A–Z dengan SORT.</p></div></div><div class="step"><div><h3>Menit 27–30 · Uji hasil</h3><p>Ubah kriteria dan siapkan satu contoh untuk review.</p></div></div></div></div>
+      <div class="dark-note"><h3>Output kelompok</h3><ul><li>Daftar kategori sesuai dropdown.</li><li>Daftar sesuai kategori dan qty minimum.</li><li>Daftar kategori tanpa duplikasi.</li><li>Daftar nama item A–Z.</li><li>Penjelasan mengapa hasil berubah.</li></ul><p>Jangan mengubah <b>01_DATA_HASIL_S4</b>.</p></div></div>
+    <div class="callout"><b>Link workbook latihan peserta:</b> <a class="worksheet-inline" href="https://docs.google.com/spreadsheets/d/1U_iBl-xTPXZ1wSWWSlKlmaBsz0VpD6iC/edit?usp=sharing&amp;ouid=113453549576979377139&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Klik di sini untuk membuka Soal Sesi 5 ↗</a></div>
   </section>
 
   <section class="slide" data-title="Review dan troubleshooting" data-note="Gunakan pertanyaan review: apa fungsi FILTER; perbedaan satu dan dua kriteria; arti *; alasan >=; fungsi UNIQUE dan SORT; apa penyebab #SPILL!. Troubleshooting: #SPILL! berarti area hasil terhalang atau ada merged cell; tidak ada data berarti kriteria tidak cocok; hasil bergeser berarti rentang sumber tidak sejalan dengan header; #NAME? dapat berarti versi Excel tidak mendukung fungsi dynamic array atau nama fungsi salah.">
     <div class="eyebrow">12 · REVIEW & FEEDBACK · 20 MENIT</div><h2>Uji hasil, bukan hanya rumus</h2><p class="lead">Minta peserta menjelaskan apa yang berubah saat kriteria diubah dan bagaimana mereka memeriksa hasilnya.</p>
-    <div class="compare">
-      <div class="compare-panel master"><span class="panel-tag">Pertanyaan review</span><ul class="checklist"><li>Apa fungsi FILTER?</li><li>Apa arti tanda <code>*</code>?</li><li>Mengapa menggunakan <code>&gt;=</code>?</li><li>Apa fungsi UNIQUE?</li><li>Apa fungsi SORT?</li><li>Apa arti #SPILL!?</li></ul></div>
-      <div class="compare-panel raw"><span class="panel-tag">Troubleshooting</span><ul class="checklist"><li><b>#SPILL!</b> — kosongkan area output.</li><li><b>Tidak ada data</b> — cek kecocokan kriteria.</li><li><b>Kolom bergeser</b> — samakan rentang dengan header.</li><li><b>Hasil kurang</b> — cek apakah memakai <code>&gt;=</code>.</li><li><b>Kategori kosong</b> — batasi sumber ke E7:E22.</li></ul></div>
-    </div>
-    <div class="bottom-callout">Hasil dinyatakan benar jika kriteria sesuai, spill tidak terhalang, kategori unik tidak berulang, dan urutan nama item benar.</div>
+    <div class="compare"><div class="panel good"><span class="tag">Pertanyaan review</span><ul class="steps" style="margin-top:8px"><li>Apa fungsi FILTER?</li><li>Apa arti tanda <code>*</code>?</li><li>Mengapa menggunakan <code>&gt;=</code>?</li><li>Apa fungsi UNIQUE?</li><li>Apa fungsi SORT?</li><li>Apa arti #SPILL!?</li></ul></div><div class="panel raw"><span class="tag">Troubleshooting</span><ul><li><b>#SPILL!</b> — kosongkan area output.</li><li><b>Tidak ada data</b> — cek kecocokan kriteria.</li><li><b>Kolom bergeser</b> — samakan rentang dengan header.</li><li><b>Hasil kurang</b> — cek apakah memakai <code>&gt;=</code>.</li><li><b>Kategori kosong</b> — batasi sumber ke E7:E22.</li></ul></div></div>
+    <div class="callout">Hasil dinyatakan benar jika kriteria sesuai, spill tidak terhalang, kategori unik tidak berulang, dan urutan nama item benar.</div>
   </section>
 
   <section class="slide" data-title="Ringkasan dan pengantar Sesi 6" data-note="Akhiri dengan menegaskan peran masing-masing fungsi. FILTER menampilkan baris yang memenuhi kondisi; UNIQUE mengambil nilai berbeda; SORT mengurutkan. Hubungkan dengan Sesi 6: hasil filter akan digabung dengan XLOOKUP, IF/IFERROR, dan SUMIFS untuk membangun draft BQ otomatis. Output Sesi 5 menjadi bahan awal Sesi 6.">
     <div class="eyebrow">13 · QUICK REFERENCE & NEXT STEP</div><h2>Ringkasan formula Sesi 5</h2><p class="lead">Tiga fungsi, satu tujuan: membuat tampilan data lebih terarah dan dinamis.</p>
-    <div class="formula-stack"><div class="formula-row"><strong>FILTER</strong><code>=FILTER(array;include;[if_empty])</code></div><div class="formula-row"><strong>FILTER + AND</strong><code>=FILTER(array;(kondisi1)*(kondisi2);"Tidak ada data")</code></div><div class="formula-row"><strong>UNIQUE + SORT</strong><code>=SORT(UNIQUE(rentang_kategori))</code></div><div class="formula-row"><strong>SORT A–Z</strong><code>=SORT(rentang_nama)</code></div></div>
-    <div class="bottom-callout"><strong>Berikutnya — Sesi 6:</strong><span>Integrasikan FILTER + XLOOKUP + IF/IFERROR + SUMIFS untuk membangun draft Bill of Quantity otomatis.</span></div>
+    <div class="formula-list"><div class="formula-row"><b>FILTER</b><code>=FILTER(array;include;[if_empty])</code></div><div class="formula-row"><b>FILTER + AND</b><code>=FILTER(array;(kondisi1)*(kondisi2);"Tidak ada data")</code></div><div class="formula-row"><b>UNIQUE + SORT</b><code>=SORT(UNIQUE(rentang_kategori))</code></div><div class="formula-row"><b>SORT A–Z</b><code>=SORT(rentang_nama)</code></div></div>
+    <div class="callout"><b>Berikutnya — Sesi 6:</b> Integrasikan FILTER + XLOOKUP + IF/IFERROR + SUMIFS untuk membangun draft Bill of Quantity otomatis.</div>
     <p style="font-size:10px;margin-top:14px;color:#968779">Catatan: data, nama item, harga, dan seluruh informasi operasional dalam workbook adalah simulasi pelatihan.</p>
   </section>
 </div>
 </main>
-<footer class="controls"><div class="progress-wrap"><span class="counter" id="counter">01 / 13</span><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div><div class="keyboard-hint">Navigasi: ← → / Space</div><div class="navs"><button class="nav-btn" id="prevBtn" type="button" aria-label="Slide sebelumnya" disabled>←</button><button class="nav-btn" id="nextBtn" type="button" aria-label="Slide selanjutnya">→</button></div></footer>
-<div class="note-pop" id="notePop" role="dialog" aria-modal="true" aria-labelledby="noteTitle"><div class="note-card"><div class="note-head"><h3 id="noteTitle">Catatan tutor</h3><button class="quiet-btn" id="closeNotes" type="button">Tutup ✕</button></div><p id="noteText"></p></div></div>
-<div class="note-pop" id="outlinePop" role="dialog" aria-modal="true" aria-labelledby="outlineTitle"><div class="note-card"><div class="note-head"><h3 id="outlineTitle">Daftar materi</h3><button class="quiet-btn" id="closeOutline" type="button">Tutup ✕</button></div><div id="outlineList"></div></div></div>
+<footer class="controls"><div class="progress-wrap"><span class="counter" id="counter">01 / 14</span><div class="progress" aria-label="Kemajuan presentasi"><div class="progress-fill" id="progressFill"></div></div></div><div class="keyboard-hint">Navigasi: ← → / Space</div><div class="navs"><button class="nav-btn" id="prevBtn" type="button" aria-label="Slide sebelumnya" disabled>←</button><button class="nav-btn" id="nextBtn" type="button" aria-label="Slide selanjutnya">→</button></div></footer>
+
+<div class="modal" id="notePop" role="dialog" aria-modal="true" aria-labelledby="noteTitle"><div class="modal-card"><div class="modal-head"><h3 id="noteTitle">Catatan tutor</h3><button class="quiet-btn" id="closeNotes" type="button">Tutup ✕</button></div><p id="noteText"></p></div></div>
+<div class="modal" id="outlinePop" role="dialog" aria-modal="true" aria-labelledby="outlineTitle"><div class="modal-card"><div class="modal-head"><h3 id="outlineTitle">Daftar materi</h3><button class="quiet-btn" id="closeOutline" type="button">Tutup ✕</button></div><div id="outlineList"></div></div></div>
+
 <script>
 (() => {
   const slides = Array.from(document.querySelectorAll('.slide'));
@@ -192,54 +153,64 @@
   const outlinePop = document.getElementById('outlinePop');
   const outlineList = document.getElementById('outlineList');
   let current = 0;
-  const pad = n => String(n).padStart(2,'0');
-  slides.forEach((slide,i) => {
-    const num = document.createElement('div');
-    num.className='slide-number';
-    num.textContent=`${pad(i+1)} / ${pad(slides.length)}`;
-    slide.appendChild(num);
-  });
-  function showSlide(index){
-    current=Math.max(0,Math.min(slides.length-1,index));
-    slides.forEach((slide,i)=>{
-      slide.classList.toggle('active',i===current);
-      slide.classList.toggle('exit-left',i<current);
-      slide.setAttribute('aria-hidden',i===current?'false':'true');
+  const pad = n => String(n).padStart(2, '0');
+
+  function showSlide(index) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === current);
+      slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
     });
-    counter.textContent=`${pad(current+1)} / ${pad(slides.length)}`;
-    progressFill.style.width=`${((current+1)/slides.length)*100}%`;
-    prevBtn.disabled=current===0; nextBtn.disabled=current===slides.length-1;
-    document.title=`${pad(current+1)} — ${slides[current].dataset.title} | PMD`;
-    if(notePop.classList.contains('open')) updateNote();
+    counter.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
+    progressFill.style.width = `${((current + 1) / slides.length) * 100}%`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === slides.length - 1;
+    document.title = `${pad(current + 1)} — ${slides[current].dataset.title} | PMD`;
+    if (notePop.classList.contains('open')) updateNote();
   }
-  function updateNote(){noteTitle.textContent=`Catatan tutor · ${slides[current].dataset.title}`;noteText.textContent=slides[current].dataset.note||'Tidak ada catatan untuk slide ini.';}
-  function openNotes(){updateNote();notePop.classList.add('open');document.getElementById('closeNotes').focus();}
-  function closeNotes(){notePop.classList.remove('open');notesBtn.focus();}
-  function openOutline(){outlinePop.classList.add('open');document.getElementById('closeOutline').focus();}
-  function closeOutline(){outlinePop.classList.remove('open');document.getElementById('outlineBtn').focus();}
-  prevBtn.addEventListener('click',()=>showSlide(current-1));
-  nextBtn.addEventListener('click',()=>showSlide(current+1));
-  notesBtn.addEventListener('click',openNotes);
-  document.getElementById('closeNotes').addEventListener('click',closeNotes);
-  document.getElementById('outlineBtn').addEventListener('click',openOutline);
-  document.getElementById('closeOutline').addEventListener('click',closeOutline);
-  document.getElementById('fullscreenBtn').addEventListener('click',async()=>{
-    const target=document.getElementById('presentation');
-    try{if(!document.fullscreenElement) await target.requestFullscreen(); else await document.exitFullscreen();}
-    catch(error){alert('Mode layar penuh tidak didukung pada browser ini.');}
+
+  function updateNote() {
+    noteTitle.textContent = `Catatan tutor · ${slides[current].dataset.title}`;
+    noteText.textContent = slides[current].dataset.note || 'Tidak ada catatan untuk slide ini.';
+  }
+  function openNotes() { updateNote(); notePop.classList.add('open'); document.getElementById('closeNotes').focus(); }
+  function closeNotes() { notePop.classList.remove('open'); notesBtn.focus(); }
+  function openOutline() { outlinePop.classList.add('open'); document.getElementById('closeOutline').focus(); }
+  function closeOutline() { outlinePop.classList.remove('open'); document.getElementById('outlineBtn').focus(); }
+
+  prevBtn.addEventListener('click', () => showSlide(current - 1));
+  nextBtn.addEventListener('click', () => showSlide(current + 1));
+  notesBtn.addEventListener('click', openNotes);
+  document.getElementById('closeNotes').addEventListener('click', closeNotes);
+  document.getElementById('outlineBtn').addEventListener('click', openOutline);
+  document.getElementById('closeOutline').addEventListener('click', closeOutline);
+  document.getElementById('fullscreenBtn').addEventListener('click', async () => {
+    const target = document.getElementById('presentation');
+    try {
+      if (!document.fullscreenElement) await target.requestFullscreen();
+      else await document.exitFullscreen();
+    } catch (error) { alert('Mode layar penuh tidak didukung pada browser ini.'); }
   });
-  [notePop,outlinePop].forEach(pop=>pop.addEventListener('click',e=>{if(e.target===pop)pop.classList.remove('open');}));
-  document.addEventListener('keydown',e=>{
-    if(notePop.classList.contains('open')||outlinePop.classList.contains('open')){if(e.key==='Escape'){notePop.classList.remove('open');outlinePop.classList.remove('open');}return;}
-    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();showSlide(current+1);}
-    if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();showSlide(current-1);}
-    if(e.key==='Home')showSlide(0); if(e.key==='End')showSlide(slides.length-1);
+  [notePop, outlinePop].forEach(pop => pop.addEventListener('click', event => {
+    if (event.target === pop) pop.classList.remove('open');
+  }));
+  document.addEventListener('keydown', event => {
+    if (notePop.classList.contains('open') || outlinePop.classList.contains('open')) {
+      if (event.key === 'Escape') { notePop.classList.remove('open'); outlinePop.classList.remove('open'); }
+      return;
+    }
+    if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); showSlide(current + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); showSlide(current - 1); }
+    if (event.key === 'Home') showSlide(0);
+    if (event.key === 'End') showSlide(slides.length - 1);
   });
-  slides.forEach((slide,index)=>{
-    const btn=document.createElement('button');btn.type='button';
-    btn.textContent=`${pad(index+1)}  ${slide.dataset.title}`;
-    btn.style.cssText='display:block;width:100%;text-align:left;padding:11px 12px;margin:5px 0;border:1px solid #e7d9c9;border-radius:8px;background:#fffdf9;color:#493126;cursor:pointer;font-size:12px';
-    btn.addEventListener('click',()=>{showSlide(index);closeOutline();});outlineList.appendChild(btn);
+  slides.forEach((slide, index) => {
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.textContent = `${pad(index + 1)}  ${slide.dataset.title}`;
+    item.style.cssText = 'display:block;width:100%;text-align:left;padding:11px 12px;margin:5px 0;border:1px solid #e7d9c9;border-radius:8px;background:#fffdf9;color:#493126;cursor:pointer;font-size:12px';
+    item.addEventListener('click', () => { showSlide(index); closeOutline(); });
+    outlineList.appendChild(item);
   });
   showSlide(0);
 })();
